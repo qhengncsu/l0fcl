@@ -1,0 +1,99 @@
+library(FastKNN)
+library(dynamicTreeCut)
+library(sparcl)
+library(igraph)
+source('proj_simplex.R')
+dw <- function(x,y,w){sum(w*(x-y)^2)}
+
+l0cl <- function(X,M,gamma,s=10,lambda=0.15,k=5,max_iter=100,projection='l0'){
+  n <- dim(X)[1]
+  p <- dim(X)[2]
+  w <- runif(p)
+  w <- w/sum(w)
+  ##w <- rep(1/p,p)
+  w_prev <- w
+  D <- numeric(p)
+  iter <- 0
+  while(iter <= max_iter){
+    iter <- iter + 1
+    # construct affinity matrix
+    phi <- matrix(0,n,n)
+    for(i in 1:n){
+      for(j in 1:n){
+        phi[i,j] <- dw(X[i,],X[j,],w^2)
+      }
+    }
+    nn <- matrix(0,n,k) # n x k
+    for(i in 1:n)
+      nn[i,] <- k.nearest.neighbors(i, phi, k)
+    W <- matrix(0,n,n)
+    for(i in 1:n){
+      for(j in nn[i,]){
+        W[i,j] <- exp(-0.5*phi[i,j]/p)
+      }
+    }
+    for(i in 1:n){
+      for(l in 1:p){
+        if(projection=='l0'){
+          denominator <- (sum(W[i,nn[i,]])+sum(W[nn[i,],i]))*gamma+w[l]^2
+          M[i,l] <- (gamma*(sum(W[i,nn[i,]]*M[nn[i,],l])+sum(W[nn[i,],i]*M[nn[i,],l]))
+                  +w[l]^2*X[i,l])/denominator
+        }else{
+          denominator <- (sum(W[i,nn[i,]])+sum(W[nn[i,],i]))*gamma+w[l]^+lambda*w[l]
+          M[i,l] <- (gamma*(sum(W[i,nn[i,]]*M[nn[i,],l])+sum(W[nn[i,],i]*M[nn[i,],l]))
+                     +(w[l]^2+lambda*w[l])*X[i,l])/denominator
+        }
+      }
+    }
+    
+    for(l in 1:p){
+      D[l] <- sum((X[,l]-M[,l])^2)
+    }
+    if(projection=='l0'){
+      w <- proj_simplex_l0(w,s,D)
+    }
+    else{
+      w <- proj_simplex_l1(w,lambda,D)
+    }
+    w_prev <- w
+  }
+  
+  return(list(M,w))
+}
+
+label_orientation <- function(label){
+  m <- length(label)
+  u <- unique(label)
+  u <- sort(u)
+  n <- length(u)
+  u1 <- numeric(m)
+  for(i in 1:n){
+    I <- which(label==u[i])
+    u1[I] <- i
+  }
+  return(u1)
+}
+
+X=read.csv('../movement_libras.csv',head=FALSE)
+X=data.matrix(X)
+toss=X[,91]
+X=X[,-91]
+I3=which(toss==3)
+I4=which(toss==4)
+I5=which(toss==5)
+I7=which(toss==7)
+I11=which(toss==11)
+I12=which(toss==12)
+I=c(I3,I4,I5,I7,I11,I12)
+X=X[I,]
+toss=toss[I]
+p=dim(X)[2]
+for(i in 1:p){
+  X[,i]=(X[,i]-mean(X[,i]))/sd(X[,i])
+}
+
+
+l <- coo_desc(X,X,rep(1,90),10,s=90)
+h=hclust(dist(l[[1]]),method = 'average')
+c=cutreeDynamic(h,distM = as.matrix(dist(l[[1]])),minClusterSize=20)
+compare(toss,c,'adjusted.rand')

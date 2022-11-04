@@ -1,0 +1,97 @@
+[
+    {
+        "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/coo_desc.cpp",
+        "file_last_write": 1667439219.0,
+        "definitions": [
+            {
+                "usr": "c:@F@coo_desc#I#I#I#d#I#d#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "coo_desc(int, int, int, double, int, double, int, int, int, int)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/coo_desc.cpp",
+                "line": 9,
+                "column": 6
+            }
+        ]
+    },
+    {
+        "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/projections.cpp",
+        "file_last_write": 1667414169.0,
+        "definitions": [
+            {
+                "usr": "c:@F@soft#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "soft(int, double)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/projections.cpp",
+                "line": 12,
+                "column": 14
+            },
+            {
+                "usr": "c:@F@proj_simplex_l0#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "proj_simplex_l0(int, int, int)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/projections.cpp",
+                "line": 18,
+                "column": 14
+            },
+            {
+                "usr": "c:@F@proj_simplex_l1#I#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "proj_simplex_l1(int, double, int)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/projections.cpp",
+                "line": 29,
+                "column": 14
+            }
+        ]
+    },
+    {
+        "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/projections.hpp",
+        "file_last_write": 1667342761.0,
+        "definitions": []
+    },
+    {
+        "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/rcpparma_hello_world.cpp",
+        "file_last_write": 1667246415.0,
+        "definitions": [
+            {
+                "usr": "c:@F@rcpparma_hello_world#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_hello_world",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/rcpparma_hello_world.cpp",
+                "line": 18,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rcpparma_outerproduct#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_outerproduct(const int &)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/rcpparma_hello_world.cpp",
+                "line": 30,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rcpparma_innerproduct#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_innerproduct(const int &)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/rcpparma_hello_world.cpp",
+                "line": 38,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@rcpparma_bothproducts#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_bothproducts(const int &)",
+                "file": "C:/Users/19199/Desktop/L0-sparse Fusion Clustering/l0fcl/src/rcpparma_hello_world.cpp",
+                "line": 47,
+                "column": 12
+            }
+        ]
+    }
+]

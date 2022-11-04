@@ -1,0 +1,22 @@
+library(cmna)
+soft <- function(x,T){pmax(abs(x)-T,0)*sign(x)}
+
+proj_simplex_l1 <- function(x,lambda,D){
+  p <- length(x)
+  alpha_max <- max(D)*2/p + lambda
+  f <- function(alpha) {sum(soft(alpha/D,lambda))-2}
+  alpha_star <- bisection(f,0,alpha_max,tol=1e-7)
+  return(0.5*soft(alpha_star/D,lambda))
+}
+
+
+proj_simplex_l0 <- function(x,s,D){
+  p <- length(x)
+  order_D <- order(D)
+  nonzero_index <- order_D[1:s]
+  D_active_inv <- 1/(D[nonzero_index])
+  x_proj <- rep(0,p);
+  x_proj[nonzero_index] <- D_active_inv/sum(D_active_inv)
+  return(x_proj)
+}
+
